@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+MyArray::MyArray()
+{
+}
+
 MyArray::MyArray(int n)
 {
 	size = n;
@@ -14,21 +18,18 @@ MyArray::MyArray(int n)
 
 MyArray::MyArray(const MyArray & ar)
 {
-	int* tmp = new int [];
+	size = ar.size;
+	int* tmp = new int [size];
 	for (int i = 0; i < size; i++)
 	{
-		tmp[i] = this[i];
+		tmp[i] = ar.ar[i];
 	}
+	this->ar = tmp;
 }
 
 int MyArray::getSize() const
 {
-	int n = 0;
-	for (int i = 0; i < getCapacity(); i++)
-	{
-		if (ar[i] == NULL) n++;
-
-	}
+	return size;
 }
 
 int MyArray::getCapacity() const
@@ -40,7 +41,7 @@ void MyArray::show() const
 {
 	for (int i = 0; i < size; i++)
 	{
-		cout << ar[i] << "\n";
+		cout << ar[i] << " ";
 	}
 }
 
@@ -49,7 +50,7 @@ void MyArray::addCapacity(int n)
 	int* ptr = new int[size+n];
 	for (int i = 0; i < size + n; i++)
 	{
-		if (ar[i] !== NULL)
+		if (ar[i] != NULL)
 			ptr[i] = ar[i];
 		else
 			ptr[i] = 0;
@@ -74,4 +75,8 @@ MyArray & MyArray::operator=(const MyArray & ar1)
 MyArray::~MyArray()
 {
 	delete[] ar;
+}
+
+Container::~Container()
+{
 }
