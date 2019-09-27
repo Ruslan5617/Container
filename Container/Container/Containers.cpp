@@ -47,11 +47,19 @@ void MyArray::show() const
 
 void MyArray::addCapacity(int n)
 {
-	MyArray ptr;
-	ptr.size = size + n;
-	ptr.ar = new int[getCapacity() + n];
+	int* tmp = new int[size + n];
+	for (int i = 0; i < size; i++)
+	{
+		tmp[i] = ar[i];
+	}
+	for (int i = size; i < size + n; i++)
+	{
+		tmp[i] = 0;
+	}
 	delete[] ar;
-	ar = new int[];
+	ar = tmp;
+	size = size + n;
+	delete[] tmp;
 }
 
 int & MyArray::operator[](int index)
